@@ -17,7 +17,6 @@ class Program
         Console.WriteLine(proxy.TestProperty);
         proxy.TestProperty = "World";
         Console.WriteLine(proxy.TestProperty);
-        
     }
 }
 

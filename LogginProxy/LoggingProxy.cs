@@ -26,6 +26,7 @@ public class LoggingProxy<T> : DynamicObject
             {
                 result = method.Invoke(_target, args);
                 _logger.Info($"Method {methodName} executed successfully with parameters: {String.Join(", ", args?.Select(x=>x.ToString())) }");
+                
                 return true;
             }
         }
@@ -34,8 +35,8 @@ public class LoggingProxy<T> : DynamicObject
             _logger.Error($"Method {methodName} threw an exception: {e.Message}");
             throw;
         }
-
         result = null;
+        
         return false;
     }
 
@@ -50,6 +51,7 @@ public class LoggingProxy<T> : DynamicObject
             {
                 result = propertyInfo.GetValue(_target);
                 _logger.Info($"Property {propertyName} extracted successfully");
+                
                 return true;
             }
         }
@@ -59,6 +61,7 @@ public class LoggingProxy<T> : DynamicObject
             throw;
         }
         result = null;
+        
         return false;
     }
 
@@ -73,6 +76,7 @@ public class LoggingProxy<T> : DynamicObject
             {
                 propertyInfo.SetValue(_target, value);
                 _logger.Info($"Property {propertyName} was successfully set to {value}");
+                
                 return true;
             }
         }
@@ -83,12 +87,12 @@ public class LoggingProxy<T> : DynamicObject
         }
         
         return false;
-        
     }
 
     public static T CreateInstance(T obj, ILogger logger)
     {
         var proxy = new LoggingProxy<T>(obj, logger);
+        
         return proxy.ActLike();
     }
 }

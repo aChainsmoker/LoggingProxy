@@ -19,9 +19,9 @@ public class FileLogger : ILoggerDestination
 
     public void Log(string message)
     {
-        using var fs = new FileStream(_filePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+        using var fileStream = new FileStream(_filePath, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
         var buffer = Encoding.Default.GetBytes(message);
-        fs.Write(buffer, 0, buffer.Length);
-        fs.WriteByte((byte)'\n');
+        fileStream.Write(buffer, 0, buffer.Length);
+        fileStream.WriteByte((byte)'\n');
     }
 }

@@ -2,5 +2,5 @@
 
 public interface ILogFormatter
 {
-    string FormatLog(LogLevel level, string? message, Exception? ex= null);
+    string FormatLog(LogLevel level, string? message, Exception? ex = null);
 }

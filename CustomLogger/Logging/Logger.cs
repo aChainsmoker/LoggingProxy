@@ -10,6 +10,7 @@ public class Logger : ILogger
         _loggers = [new ConsoleLogger()];
         _formatter = new LogFormatter();
     }
+    
     public Logger(List<ILoggerDestination> loggers)
     {
         _loggers = loggers;
@@ -50,8 +51,10 @@ public class Logger : ILogger
     {
         foreach (var logger in _loggers)
         {
-            if(logger.LoggingLevel != null && level > logger.LoggingLevel)
+            if (logger.LoggingLevel != null && level > logger.LoggingLevel)
+            {
                 continue;
+            }
             logger.Log(_formatter.FormatLog(level, message, ex));
         }
     }
